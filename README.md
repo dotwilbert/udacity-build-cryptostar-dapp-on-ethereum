@@ -269,3 +269,4 @@ Compiling your contracts...
   8 passing (2s)
   1 pending
 ```
+This  excercise would not be complete without questioning the design of this contract function. An exchange of properties should not be triggered by the actions of just one party. I could not put aside the feeling of doom, implementing this function. Hence this scribble about it.
