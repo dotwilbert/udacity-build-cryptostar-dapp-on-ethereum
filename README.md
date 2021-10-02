@@ -198,4 +198,38 @@ Compiling your contracts...
   3 pending
 ```
 
-## 
+## Task 1: lookUptokenIdToStarInfo
+
+Implemented the function by returning the name property of the Star structure stored in `tokenIdToStarInfo` at the index designated by the `_tokenId` parameter.
+
+## Task 2: lookUptokenIdToStarInfo test
+Wrote a test that creates 2 stars and then requests the names.
+
+```text
+truffle(develop)> test
+Using network 'develop'.
+
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/StarNotary.sol
+> Artifacts written to /tmp/test--1050426-b1i41CfQbn3S
+> Compiled successfully using:
+   - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+
+
+
+  ✓ can Create a Star (77ms)
+  ✓ lets user1 put up their star for sale (106ms)
+  ✓ lets user1 get the funds after the sale (163ms)
+  ✓ lets user2 buy a star, if it is put up for sale (175ms)
+  ✓ lets user2 buy a star and decreases its balance in ether (159ms)
+  ✓ can add the star name and star symbol properly (81ms)
+  - lets 2 users exchange stars
+  - lets a user transfer a star
+  ✓ lookUptokenIdToStarInfo test (129ms)
+
+  7 passing (897ms)
+  2 pending
+```
+
