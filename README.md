@@ -139,13 +139,15 @@ Do not use the [Old depreacted zipped starter code](https://s3.amazonaws.com/vid
 
 # Implementation notes
 
+Opened a [question](https://knowledge.udacity.com/questions/709048) for a technical mentor. With the mandated truffle version 5.0.2 the deployment of Migrations failed. I upgraded truffle to 5.4.13 and the deployment of oth Migrations and StarNotary worked just fine. This project is implemented with truffle 5.4.13
+
 ## Task 1: Add name and symbol preperties
 Added a constructor to the contract that takes name and symbol as parameters. Decided that once a contract is deployed, name and symbol should be immutable, so added private veriables with a read function.
 
-### Task 2: Tests for the token name and symbol
+## Task 2: Tests for the token name and symbol
 Implemented and ran tests
 
-```plain
+```text
 truffle(develop)> test
 Using network 'develop'.
 
@@ -166,3 +168,34 @@ Compiling your contracts...
   ✓ lets a user transfer a star
   ✓ lookUptokenIdToStarInfo test
 ```
+
+based upon these results I added .skip to the tests that should not run. I'm going to be a little judgy here, but two things:
+1. you should write your tests before implementing the code. A more common practice is to write the tests afterwards, but this is bad.
+2. you should not write tests that pass without the code even implemented. That is disastrous. The last three tests should FAIL because the code is not implemented. Bad practice. Part of this is course is to teach students development practices as well as the technology. This is a very bad example to set.
+
+```text
+truffle(develop)> test
+Using network 'develop'.
+
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+  ✓ can Create a Star (97ms)
+  ✓ lets user1 put up their star for sale (122ms)
+  ✓ lets user1 get the funds after the sale (163ms)
+  ✓ lets user2 buy a star, if it is put up for sale (174ms)
+  ✓ lets user2 buy a star and decreases its balance in ether (167ms)
+  ✓ can add the star name and star symbol properly (90ms)
+  - lets 2 users exchange stars
+  - lets a user transfer a star
+  - lookUptokenIdToStarInfo test
+
+  6 passing (816ms)
+  3 pending
+```
+
+## 

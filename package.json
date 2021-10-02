@@ -1,7 +1,7 @@
 {
   "name": "project002-build-cryptostar-dapp-on-ethereum-truffle-upgrade",
   "version": "1.0.0",
-  "description": "",
+  "description": "**PROJECT: Decentralized Star Notary Service Project** - For this project, you will create a DApp by adding functionality with your smart contract and deploy it on the public testnet.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
