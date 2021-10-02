@@ -1,0 +1,20 @@
+{
+  "name": "project002-build-cryptostar-dapp-on-ethereum-truffle-upgrade",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "openzeppelin-solidity": "^2.3.0",
+    "truffle": "^5.4.13",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "webpack-dev-server": "^4.3.0"
+  },
+  "dependencies": {
+    "web3": "^1.6.0"
+  }
+}

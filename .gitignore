@@ -1,0 +1,5 @@
+# ptm - ignore downloaded zip file
+nd1309-p2-Decentralized-Star-Notary-Service-Starter-Code-main.zip
+# ptm - ignore node_modules.
+node_modules
+build
