@@ -92,7 +92,7 @@ contract StarNotary is ERC721 {
         //1. Passing to star tokenId you will need to check if the owner of _tokenId1 or _tokenId2 is the sender
         require((o1 == msg.sender || o2 == msg.sender), "star not owned");
         // Following will also capture same token:
-        require(! (o1 == msg.sender && o2 == msg.sender), "same token or owner");
+        require(!(o1 == msg.sender && o2 == msg.sender), "same token or owner");
         //2. You don't have to check for the price of the token (star)
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId1)
         //4. Use _transferFrom function to exchange the tokens.
@@ -103,6 +103,18 @@ contract StarNotary is ERC721 {
     // Implement Task 1 Transfer Stars
     function transferStar(address _to1, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
+        /**
+            I'm not sure  why this test is needed. The function in the parent contract
+            already tests this. This seems like wasting gas.
+            function transferFrom(address from, address to, uint256 tokenId) public {
+                //solhint-disable-next-line max-line-length
+                require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: transfer caller is not owner nor approved");
+
+                _transferFrom(from, to, tokenId);
+            }
+         */
+        require(ownerOf(_tokenId) == msg.sender, "star not owned");
         //2. Use the transferFrom(from, to, tokenId); function to transfer the Star
+        transferFrom(msg.sender, _to1, _tokenId);
     }
 }

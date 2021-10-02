@@ -269,4 +269,42 @@ Compiling your contracts...
   8 passing (2s)
   1 pending
 ```
-This  excercise would not be complete without questioning the design of this contract function. An exchange of properties should not be triggered by the actions of just one party. I could not put aside the feeling of doom, implementing this function. Hence this scribble about it.
+
+This excercise would not be complete without questioning the design of this contract function. An exchange of properties should not be triggered by the actions of just one party. I could not put aside the feeling of doom, implementing this function. Hence this scribble about it.
+
+## Task 1: Transfer Star function
+
+Implemented a function that checks for ownership of the star and transfers it to the requested address
+
+## Task 2: Transfer Star test
+
+Implemented test for the provided functionality
+
+```text
+truffle(develop)> test
+Using network 'develop'.
+
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/StarNotary.sol
+> Artifacts written to /tmp/test--1059636-Fd1Hzsmqk44K
+> Compiled successfully using:
+   - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+
+
+
+  ✓ can Create a Star (73ms)
+  ✓ lets user1 put up their star for sale (103ms)
+  ✓ lets user1 get the funds after the sale (147ms)
+  ✓ lets user2 buy a star, if it is put up for sale (170ms)
+  ✓ lets user2 buy a star and decreases its balance in ether (150ms)
+  ✓ can add the star name and star symbol properly (106ms)
+  ✓ lets 2 users exchange stars (652ms)
+  ✓ lets a user transfer a star (200ms)
+  ✓ lookUptokenIdToStarInfo test (122ms)
+
+  9 passing (2s)
+```
+
+This excersise would also not be complete without pointing out the waste of gas that is inflicted. The parent contract already contains a transferFrom function, since that is required in the ERC721 interface. The implementation of this function already does the ownership check.
