@@ -28,6 +28,22 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const HDWalletProvider = require("truffle-hdwallet-provider");
+const defaultMnemonic = "test test test test test test test test test test test junk"
+const defaultWalletNumberOfAccounts = 10
+
+const mnemonic =
+  process.env.RINKEBY_MNEMONIC == null
+    ? defaultMnemonic
+    : process.env.RINKEBY_MNEMONIC
+const infuraProjectID = process.env.INFURA_PROJECT_ID
+const infuraProjectSecret = process.env.INFURA_PROJECT_SECRET
+const walletNumberOfAccounts = 
+  process.env.WALLET_NUMBER_OF_ACCOUNTS == null
+    ? defaultWalletNumberOfAccounts
+    : process.env.WALLET_NUMBER_OF_ACCOUNTS
+
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -52,32 +68,57 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
 
+    rinkeby: {
+      networkCheckTimeout: 60000,
+      provider: () => {
+        if (process.env.RINKEBY_MNEMONIC == null) {
+          console.log(`RINKEBY_MNEMONIC not provided, using default: ${defaultMnemonic}`)
+        }
+        if (infuraProjectID == null) {
+          console.log(`INFURA_PROJECT_ID not provided, cowardly exiting in panic`)
+          process.exit(1)
+        }
+        if (process.env.WALLET_NUMBER_OF_ACCOUNTS == null){
+          console.log(`WALLET_NUMBER_OF_ACCOUNTS not provided, using default: ${defaultWalletNumberOfAccounts}`)
+        }
+        return new HDWalletProvider(
+          mnemonic,
+          infuraProjectSecret == null
+            ? `https://rinkeby.infura.io/v3/${infuraProjectID}`
+            : `https://:${infuraProjectSecret}@rinkeby.infura.io/v3/${infuraProjectID}`,
+          0,
+          walletNumberOfAccounts
+        )
+      },
+      network_id: 4
+    },
+
     // Another network with more advanced options...
     // advanced: {
-      // port: 8777,             // Custom port
-      // network_id: 1342,       // Custom network
-      // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
-      // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
-      // from: <address>,        // Account to send txs from (default: accounts[0])
-      // websockets: true        // Enable EventEmitter interface for web3 (default: false)
+    // port: 8777,             // Custom port
+    // network_id: 1342,       // Custom network
+    // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
+    // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
+    // from: <address>,        // Account to send txs from (default: accounts[0])
+    // websockets: true        // Enable EventEmitter interface for web3 (default: false)
     // },
 
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     // ropsten: {
-      // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/${infuraKey}`),
-      // network_id: 3,       // Ropsten's id
-      // gas: 5500000,        // Ropsten has a lower block limit than mainnet
-      // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/${infuraKey}`),
+    // network_id: 3,       // Ropsten's id
+    // gas: 5500000,        // Ropsten has a lower block limit than mainnet
+    // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+    // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+    // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
 
     // Useful for private networks
     // private: {
-      // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
-      // network_id: 2111,   // This network is yours, in the cloud.
-      // production: true    // Treats this network as if it was a public net. (default: false)
+    // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
+    // network_id: 2111,   // This network is yours, in the cloud.
+    // production: true    // Treats this network as if it was a public net. (default: false)
     // }
   },
 
