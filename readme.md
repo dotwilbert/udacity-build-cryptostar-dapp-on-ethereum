@@ -4,8 +4,8 @@ Opened a [question](https://knowledge.udacity.com/questions/709048) for a techni
 
 ## Summary
 
-Contract address | Name | Symbol
------------------|------|-------
+Contract address                           | Name                  | Symbol
+-------------------------------------------|-----------------------|-------
 0x57AdC3aa9449a28879141bE7857b6f533eF621ea | The Universe Of Stars | STAR
 
 ## Task 1: Add name and symbol properties
