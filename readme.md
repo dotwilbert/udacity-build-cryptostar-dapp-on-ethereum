@@ -2,7 +2,13 @@
 
 Opened a [question](https://knowledge.udacity.com/questions/709048) for a technical mentor. With the mandated truffle version 5.0.2 the deployment of Migrations failed. I upgraded truffle to 5.4.13 and the deployment of oth Migrations and StarNotary worked just fine. This project is implemented with truffle 5.4.13
 
-## Task 1: Add name and symbol preperties
+## Summary
+
+Contract address | Name | Symbol
+-----------------|------|-------
+0x57AdC3aa9449a28879141bE7857b6f533eF621ea | The Universe Of Stars | STAR
+
+## Task 1: Add name and symbol properties
 Added a constructor to the contract that takes name and symbol as parameters. Decided that once a contract is deployed, name and symbol should be immutable, so added private veriables with a read function.
 
 ## Task 2: Tests for the token name and symbol
@@ -169,3 +175,157 @@ Compiling your contracts...
 ```
 
 This exercise would also not be complete without pointing out the waste of gas that is inflicted. The parent contract already contains a transferFrom function, since that is required in the ERC721 interface. The implementation of this function already does the ownership check.
+
+## Task 3: Deploy to Rinkeby
+Modified truffle-config.js to include rinkey configuration. All secrets are in env.sh. Deployed the contract to rinkeby:
+
+```text
+$ truffle console --network rinkeby
+truffle(rinkeby)> migrate --reset
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+
+
+
+
+
+truffle(rinkeby)> migrate --reset
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+Migrations dry-run (simulation)
+===============================
+> Network name:    'rinkeby-fork'
+> Network id:      4
+> Block gas limit: 30000000 (0x1c9c380)
+
+
+1_initial_migration.js
+======================
+
+   Replacing 'Migrations'
+   ----------------------
+   > block number:        9402753
+   > block timestamp:     1633298893
+   > account:             0xfd0327F339Ae6A8A88f736E4AeA9950e5db367dE
+   > balance:             38.32137685098155552
+   > gas used:            210237 (0x3353d)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000420474 ETH
+
+   -------------------------------------
+   > Total cost:         0.000420474 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'StarNotary'
+   ----------------------
+   > block number:        9402755
+   > block timestamp:     1633298924
+   > account:             0xfd0327F339Ae6A8A88f736E4AeA9950e5db367dE
+   > balance:             38.31682286498155552
+   > gas used:            2249630 (0x22539e)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00449926 ETH
+
+   -------------------------------------
+   > Total cost:          0.00449926 ETH
+
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.004919734 ETH
+
+
+
+
+
+Starting migrations...
+======================
+> Network name:    'rinkeby'
+> Network id:      4
+> Block gas limit: 29999944 (0x1c9c348)
+
+
+1_initial_migration.js
+======================
+
+   Replacing 'Migrations'
+   ----------------------
+   > transaction hash:    0x3c696f8ef8adf46da95f81e38467c43b56fc7e3f8d155a8fcb603c38ece22ca4
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x086928A7543896CE3BAE8F4258cB11B430501798
+   > block number:        9402755
+   > block timestamp:     1633298936
+   > account:             0xfd0327F339Ae6A8A88f736E4AeA9950e5db367dE
+   > balance:             38.32179732498155552
+   > gas used:            226537 (0x374e9)
+   > gas price:           1.000000008 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000226537001812296 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.000226537001812296 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'StarNotary'
+   ----------------------
+   > transaction hash:    0x050b44552b703fc592fe0be854569ec47b02be0bc676d57ca7b245c3f092351d
+   > Blocks: 0            Seconds: 8
+   > contract address:    0x57AdC3aa9449a28879141bE7857b6f533eF621ea
+   > block number:        9402757
+   > block timestamp:     1633298966
+   > account:             0xfd0327F339Ae6A8A88f736E4AeA9950e5db367dE
+   > balance:             38.31921019496085848
+   > gas used:            2314830 (0x23524e)
+   > gas price:           1.000000008 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00231483001851864 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.00231483001851864 ETH
+
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.002541367020330936 ETH
+
+
+
+(node:1155634) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 data listeners added to [Provider]. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1155634) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 connect listeners added to [Provider]. Use emitter.setMaxListeners() to increase limit
+(node:1155634) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 error listeners added to [Provider]. Use emitter.setMaxListeners() to increase limit
+(node:1155634) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Provider]. Use emitter.setMaxListeners() to increase limit
+(node:1155634) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 disconnect listeners added to [Provider]. Use emitter.setMaxListeners() to increase limit
+- Blocks: 0            Seconds: 0
+- Saving migration to chain.
+- Blocks: 0            Seconds: 0
+- Saving migration to chain.
+
+truffle(rinkeby)>
+```
