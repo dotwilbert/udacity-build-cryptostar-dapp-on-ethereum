@@ -8,6 +8,13 @@ Contract address                           | Name                  | Symbol
 -------------------------------------------|-----------------------|-------
 0x57AdC3aa9449a28879141bE7857b6f533eF621ea | The Universe Of Stars | STAR
 
+```bash
+$ npm list truffle openzeppelin-solidity
+project002-build-cryptostar-dapp-on-ethereum-truffle-upgrade@1.0.0 /home/wilbert/Projects/20210804-udacity-npblockchain/project002-build-cryptostar-dapp-on-ethereum-truffle-upgrade
+├── openzeppelin-solidity@2.3.0 
+└── truffle@5.4.13 
+```
+
 ## Task 1: Add name and symbol properties
 Added a constructor to the contract that takes name and symbol as parameters. Decided that once a contract is deployed, name and symbol should be immutable, so added private veriables with a read function.
 
@@ -329,3 +336,7 @@ Summary
 
 truffle(rinkeby)>
 ```
+
+## Task 4: Adjust front end
+
+Implemented the lookup function and replaced the window.ethereum and ethereum.enable calls with the recommended way of connecting to Metamask.
